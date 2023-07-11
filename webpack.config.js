@@ -1,9 +1,10 @@
+const path = require("path")
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
 	entry: './src/js/app.ts',
 	output: {
-		path: __dirname+"/dist",
+		path: path.resolve(__dirname, 'dist'),	
 		filename: "bundle.js",
 	},
 	resolve: {
@@ -35,7 +36,11 @@ module.exports = {
 				use: [
 					{ loader: 'file-loader' }
 				]
-			}
+			},
+			{
+        		test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        		type: 'asset/resource',
+      		}
 		]
 	},
 	plugins: [

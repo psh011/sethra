@@ -12,5 +12,8 @@
 	],
 	"files": [
 		"./src/js/app.ts"
+	],
+	"include": [
+		"src/**/*"
 	]
 }
