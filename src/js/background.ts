@@ -1,6 +1,5 @@
 import Template from "../assets/images/template.png"
 export default class Background {
-	private ctx: CanvasRenderingContext2D;
 	private y: number;
 	private x: number;
 	private image: any = new Image();
