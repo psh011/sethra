@@ -7,7 +7,6 @@ export default class Smile {
 	constructor() {
 	}
 
-
 	public draw(ctx: CanvasRenderingContext2D, x: number, y: number): void {
 
           ctx.fillStyle = "rgba(200, 200, 0, 0.5)";
