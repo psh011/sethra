@@ -1,15 +1,18 @@
 /*import Template from "../assets/images/template.png"*/
+import Debug from "./objects/Debug"
 import Smile from "./smile"
 import Ship from "./ship"
-import Background from "./background"
+import Background from "./objects/Background"
 import Building from "./building"
 import Projectile from "./projectile"
+
 export default class Game {
 	private canvas: HTMLCanvasElement;
 	private ctx: CanvasRenderingContext2D;
 	private height: number = window.innerHeight;
 	private width: number = window.innerWidth;
 	private background: Background;
+	private debug: Debug;
 	private ship: Ship;
 	private shipX: number;
 	private shipY: number;
@@ -22,29 +25,35 @@ export default class Game {
 	private projectile: Projectile;
 	private building: Building;
 
-
-
-
 	constructor() {
 		this.canvas = <HTMLCanvasElement>document.getElementById('canvas');
 		this.canvas.width = this.width;
 		this.canvas.height = this.height;
 		this.ctx = this.canvas.getContext("2d");
 		this.background = new Background();
-		this.ship = new Ship
+		this.ship = new Ship();
 		this.shipX = 75;
 		this.shipY = 75;
-		this.projectile = new Projectile
-		this.building = new Building
-		document.addEventListener('keydown', this.keyPressed);
-		document.addEventListener('keyup', this.keyReleased);
+		this.projectile = new Projectile();
+		this.building = new Building();
+		this.debug = new Debug();
+
+		/* NOTE document.addEventListener was creating a separate scope for this.keyPressed 
+			and this.keyReleased to run within.  This meant that that this.keyHeldW was not 
+			being read from our Game instance, but some other instance we did not expect.
+			Calling this.keyPressed and this.keyReleased with a function like this fixes
+			the scope issue and now we have movement!
+		*/
+		document.addEventListener('keydown', (evt) => this.keyPressed(evt));
+		document.addEventListener('keyup', (evt) => this.keyReleased(evt));
 
 	}
 
 	public render(): void {
-		console.log('rendering');
+		// console.log('rendering');
 		this.playerMove();
 		this.background.draw(this.ctx, 0, 0);
+		this.debug.draw(this.ctx, 10, 10);
 		this.draw();
 	}
 	public draw(): void {
@@ -62,7 +71,7 @@ export default class Game {
 		}
 	}
 
-	private keyPressed(evt: KeyboardEvent) {
+	private keyPressed(evt: KeyboardEvent): void {
 		console.log("Key pressed: " + evt.key);
 		if (evt.key == 'a') {
 			this.keyHeldA = true;
@@ -71,7 +80,6 @@ export default class Game {
 			this.keyHeldD = true;
 		}
 		if (evt.key == 'w') {
-			console.log("should move up");
 			this.keyHeldW = true;
 		}
 		if (evt.key == 's') {
@@ -81,7 +89,7 @@ export default class Game {
 		evt.preventDefault();
 	}
 
-	private keyReleased(evt: KeyboardEvent) {
+	private keyReleased(evt: KeyboardEvent): void {
 		console.log("Key released: " + evt.key);
 		if (evt.key == 'a') {
 			this.keyHeldA = false;
@@ -100,12 +108,11 @@ export default class Game {
 			this.playerSpeedY = 0;
 		}
 	}
-	private playerMove() {
+	private playerMove(): void {
 		this.shipX += this.playerSpeedX;
 		this.shipY += this.playerSpeedY;
-		console.log('cordinates', this.shipX, this.shipY, this.keyHeldW)
+		// console.log('cordinates', this.shipX, this.shipY, this.keyHeldW, this.playerSpeedY)
 		if (this.keyHeldW) {
-			console.log('moving up')
 			this.playerSpeedY = -7;
 		}
 		if (this.keyHeldS) {
@@ -118,16 +125,18 @@ export default class Game {
 			this.playerSpeedX = 7;
 		}
 		if (this.shipY <= 0) { // player wrapping top to bottom
-			this.shipY = this.canvas.height - this.ship.getHeight() + 2;
-		} else if (this.shipY >= this.canvas.height - this.ship.getHeight()) { // player wrapping top to bottom
+			this.shipY = this.background.getHeight() - this.ship.getHeight() + 2;
+		} else if (this.shipY >= this.background.getHeight() - this.ship.getHeight()) { // player wrapping top to bottom
 			this.shipY = 2;
 		}
 
-		if (this.shipX >= this.canvas.width - this.ship.getWidth()) { // player wrapping top to bottom
+		if (this.shipX >= this.background.getWidth() - this.ship.getWidth()) { // player wrapping top to bottom
 			this.shipX = 2;
 		} else if (this.shipX <= 0) { // player wrapping top to bottom
-			this.shipX = this.canvas.width - this.ship.getWidth() + 2;
+			this.shipX = this.background.getWidth() - this.ship.getWidth() + 2;
 		}
+
+		this.debug.setDebugContext(this.keyHeldW, this.keyHeldA, this.keyHeldS, this.keyHeldD, this.playerSpeedX, this.playerSpeedY);
 	}
 
 }
