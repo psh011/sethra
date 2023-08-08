@@ -36,8 +36,8 @@ export default class Game {
 		this.shipY = 75;
 		this.projectile = new Projectile
 		this.building = new Building
-		document.addEventListener('keydown', this.keyPressed);
-		document.addEventListener('keyup', this.keyReleased);
+        document.addEventListener('keydown', (evt) => this.keyPressed(evt));
+        document.addEventListener('keyup', (evt) => this.keyReleased(evt));
 
 	}
 
