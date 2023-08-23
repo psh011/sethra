@@ -1,10 +1,13 @@
 //TODO copy class and make other image classes.
-export default class Building {
+import GameObject from "../abstract/GameObject";
+
+export default class Building extends GameObject{
 	private ctx: CanvasRenderingContext2D;
 	private y: number;
 	private x: number;
 
 	constructor() {
+		super();
 	}
 
 	public draw(ctx: CanvasRenderingContext2D, x: number, y: number): void {
@@ -35,4 +38,10 @@ export default class Building {
 
 	}
 
+	public getWidth(): number {
+		throw new Error("Method not implemented.");
+	}
+	public getHeight(): number {
+		throw new Error("Method not implemented.");
+	}
 }

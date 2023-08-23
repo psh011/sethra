@@ -1,10 +1,10 @@
 /*import Template from "../assets/images/template.png"*/
 import Debug from "./objects/Debug"
-import Smile from "./smile"
-import Ship from "./ship"
+import Ship from "./objects/ship"
 import Background from "./objects/Background"
-import Building from "./building"
-import Projectile from "./projectile"
+import Building from "./objects/Building"
+import Projectile from "./objects/projectile"
+import GameObject from "./abstract/GameObject"
 
 export default class Game {
 	private canvas: HTMLCanvasElement;
@@ -24,6 +24,7 @@ export default class Game {
 	private keyHeldD: boolean = false;
 	private projectile: Projectile;
 	private building: Building;
+	gameObjects: any
 
 	constructor() {
 		this.canvas = <HTMLCanvasElement>document.getElementById('canvas');
@@ -52,6 +53,9 @@ export default class Game {
 	public render(): void {
 		// console.log('rendering');
 		this.playerMove();
+		/*for(var gameObject of this.gameObjects) {
+
+		}*/
 		this.background.draw(this.ctx, 0, 0);
 		this.debug.draw(this.ctx, 10, 10);
 		this.draw();
@@ -62,9 +66,7 @@ export default class Game {
 			//this.smile.draw(this.ctx, this.smileX, this.smileY);
 			this.ship.draw(this.ctx, this.shipX, this.shipY);
 			//this.projectile.draw(this.ctx, 100, 100);
-			//this.building.draw(this.ctx, 100, 100);
-
-
+			this.building.draw(this.ctx, 100, 100);
 
 		} else {
 			console.log("test");
@@ -124,6 +126,8 @@ export default class Game {
 		if (this.keyHeldD) {
 			this.playerSpeedX = 7;
 		}
+		
+		this.ship.setSpeedX(this.playerSpeedX);
 		if (this.shipY <= 0) { // player wrapping top to bottom
 			this.shipY = this.background.getHeight() - this.ship.getHeight() + 2;
 		} else if (this.shipY >= this.background.getHeight() - this.ship.getHeight()) { // player wrapping top to bottom
