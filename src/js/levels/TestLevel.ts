@@ -14,8 +14,8 @@ export default class TestLevel extends Level {
         super.loadLevel(ship);
         
         const building = new Building();
-        building.setX(800);
-        building.setY(800);
+        building.setX(1200);
+        building.setY(1200);
         this.gameObjects.push(building);
         
         const projectile = new Projectile();
@@ -30,24 +30,29 @@ export default class TestLevel extends Level {
         this.gameObjects.push(leftWall);
 
         const rightWall = new Wall();
-        rightWall.setRenderer(TestLevelWallRenderer.renderWallLeft);
-        rightWall.setX(this.getWidth());
+        rightWall.setRenderer(TestLevelWallRenderer.renderWallRight);
+        rightWall.setX(this.getWidth() - rightWall.getWidth());
         rightWall.setY(200);
         this.gameObjects.push(rightWall);
+
+        const floor = new Wall();
+        floor.setRenderer(TestLevelWallRenderer.renderFloor);
+        floor.setX(0);
+        floor.setY(this.getHeight());
+        this.gameObjects.push(floor);
     }
 
     public getWidth(): number {
-        return 500;
+        return 2000;
         // return this.background.getWidth();
     }
     
     public getHeight(): number {
-        return 500;
+        return 1500;
         // return this.background.getHeight();
     }
 
     public draw(ctx: CanvasRenderingContext2D, x: number, y: number): void {
-        this.background.draw(ctx, 0, 0);
         for (const object of this.gameObjects) {
             object.draw(ctx, object.getX(), object.getY());
         }
