@@ -1,3 +1,5 @@
+import BuildingModel from './Building.model';
+import GameObjectModel from './GameObject.model';
 import TileModel from './Tile.model';
 
 // TODO Think about implementing planet tiles as a circular linked list
@@ -6,10 +8,12 @@ export default class Planet {
     protected size: number;
     protected tiles: TileModel[];
     protected width: number;
+    protected gameObjects: GameObjectModel[];
 
     protected constructor(size: number = 1) {
         this.size = size;
         this.tiles = [];
+        this.gameObjects = [];
     }
 
     public getSize(): number {
@@ -18,6 +22,10 @@ export default class Planet {
 
     public getTiles(): TileModel[] {
         return this.tiles;
+    }
+
+    public getGameObjects(): GameObjectModel[] {
+        return this.gameObjects;
     }
 
     public getWidth(): number {
@@ -36,45 +44,13 @@ export default class Planet {
         return 0;
     }
 
-    public getTilesBetween(minX: number, maxX: number): TileModel[] {
-        const tilesBetween: TileModel[] = [];
-
-        console.log('raw min, max', minX, maxX);
-        // if ( minX < 0 ) minX += this.width;
-
-        // console.log('adj min, max', minX, maxX);
-        this.tiles.forEach(tileModel => {
-            const tileMinX = tileModel.getX();
-            const tileMaxX = tileModel.getX() + tileModel.getWidth();
-
-            // TODO Improve this logic
-            if ( tileMinX >= minX && tileMinX <= maxX ) {
-                tilesBetween.push(tileModel);
-            } else if ( tileMaxX >= minX && tileMaxX <= maxX ) {
-                tilesBetween.push(tileModel);
-            } else if ( minX < 0 && tileMinX >= (minX + this.width) && tileMinX <= (maxX + this.width)) {
-                tilesBetween.push(tileModel);
-            } else if ( minX < 0 && tileMaxX >= (minX + this.width) && tileMaxX <= (maxX + this.width)) {
-                tilesBetween.push(tileModel);
-            } else if ( maxX > this.width && tileMinX >= (minX - this.width) && tileMinX <= (maxX - this.width)) {
-                tilesBetween.push(tileModel);
-            } else if ( maxX > this.width && tileMaxX >= (minX - this.width) && tileMaxX <= (maxX - this.width)) {
-                tilesBetween.push(tileModel);
-            }
-  
-        });
-
-        return tilesBetween;
-
-    }
-
-
     public static generatePlanet(size: number = 1): Planet {
         const planet = new Planet(size);
         const tileCount = planet.size * 10;
         let elevation = 0;
         let planetWidth = 0;
         
+        // Add tiles
         for (let i = 0; i < tileCount; i++) {
             const tileModel = TileModel.generateTile(planetWidth, elevation);
             planet.tiles.push(tileModel);
@@ -82,6 +58,31 @@ export default class Planet {
         }
 
         planet.width = planetWidth;
+
+        // Add buildings
+        /*
+        for (let i = 0; i < size; i++) {
+            const buildingModel = BuildingModel.generateBuilding();
+            buildingModel.setX(planetWidth-50);
+            buildingModel.setX(Math.random() * planetWidth);
+            planet.gameObjects.push(buildingModel);
+        }
+        */
+        let buildingModel = BuildingModel.generateBuilding();
+        buildingModel.setX(planetWidth - 50);
+        planet.gameObjects.push(buildingModel);
+
+        buildingModel = BuildingModel.generateBuilding();
+        buildingModel.setX(250);
+        planet.gameObjects.push(buildingModel);
+
+        buildingModel = BuildingModel.generateBuilding();
+        buildingModel.setX(planetWidth - 450);
+        planet.gameObjects.push(buildingModel);
+
+        buildingModel = BuildingModel.generateBuilding();
+        buildingModel.setX(650);
+        planet.gameObjects.push(buildingModel);
 
         return planet;
     }

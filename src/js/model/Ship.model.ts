@@ -13,6 +13,10 @@ export default class Ship extends GameObject {
 		super();
 	}
 
+	public getClassName(): string {
+		return 'Ship';
+	}
+
 	public setXSpeed(xSpeed: number): void {
 		super.setXSpeed(xSpeed);
 		if (xSpeed > 0) {

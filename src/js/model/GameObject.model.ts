@@ -4,6 +4,7 @@ export default abstract class GameObject {
     protected xSpeed: number = 0;
     protected ySpeed: number = 0;
 
+    abstract getClassName(): string;
     abstract getWidth(): number;
     abstract getHeight(): number;
 
@@ -47,4 +48,10 @@ export default abstract class GameObject {
         this.ySpeed = ySpeed;
     }
 
+    public insideSquare(minX: number, maxX: number, minY: number, maxY: number): boolean {
+        return (
+            (this.x >= minX && this.x <= maxX) &&
+            (this.y >= minY && this.y <= maxY)
+        );
+    }
 }

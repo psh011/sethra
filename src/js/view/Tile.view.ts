@@ -9,11 +9,9 @@ export default class Tile {
 		
 		let screenY = 0;
 		let yMax = y + yRange;
-		console.log("y", y, yRange, yMax);
 		
 		// Sky Layer - above 0 elevation
 		const skyHeight = Math.min(yMax, yRange);
-		console.log('skyHeight', skyHeight);
 		ctx.fillStyle = "rgb(135, 206, 235)";
 		ctx.fillRect(x, screenY, xRange, skyHeight);
 		screenY += skyHeight;
