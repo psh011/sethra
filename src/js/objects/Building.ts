@@ -15,29 +15,43 @@ export default class Building extends GameObject {
 
 	public draw(ctx: CanvasRenderingContext2D, x: number, y: number): void {
 
-		ctx.fillStyle = "rgb(222, 222, 222)";
-		ctx.fillRect(40, 50, 10, 10);
-		ctx.fillRect(40, 60, 10, 10);
-		ctx.fillRect(40, 40, 10, 10);
+		ctx.fillStyle = "rgb(100,100,100)";
+		ctx.fillRect(x, y-10, 10, 10);
+		ctx.fillRect(x, y-20, 10, 10);
+		ctx.fillRect(x+10, y-30, 10, 10);
+		ctx.fillRect(x+20, y-40, 10, 10);
+		ctx.fillRect(x+20, y-50, 10, 10);
+		ctx.fillRect(x+20, y-60, 10, 10);
+		ctx.fillRect(x+20, y-70, 10, 10);
+		ctx.fillRect(x+20, y-80, 10, 10);
+		ctx.fillRect(x+10, y-80, 10, 10);
 		ctx.fillStyle = "rgb(189, 187, 187)";
-		ctx.fillRect(50, 30, 10, 10);
-		ctx.fillRect(50, 60, 10, 10);
-		ctx.fillRect(50, 50, 10, 10);
-		ctx.fillRect(50, 40, 10, 10);
+		ctx.fillRect(x+10, y-10, 10, 10);
+		ctx.fillRect(x+20, y-10, 10, 10);
+		ctx.fillRect(x+40, y-30, 10, 10);
+		ctx.fillRect(x+30, y-40, 10, 10);
+		ctx.fillRect(x+30, y-50, 10, 10);
+		ctx.fillRect(x+30, y-60, 10, 10);
+		ctx.fillRect(x+30, y-70, 10, 10);
+		ctx.fillRect(x+30, y-80, 10, 10);
+		ctx.fillRect(x+30, y-90, 10, 10);
+		ctx.fillRect(x+40, y-100, 10, 10);
 		ctx.fillStyle = "rgb(156, 156, 156)";
-		ctx.fillRect(60, 40, 10, 10);
-		ctx.fillRect(60, 50, 10, 10);
-		ctx.fillRect(60, 60, 10, 10);
-		ctx.fillRect(60, 30, 10, 10);
+		ctx.fillRect(x+40, y, 10, 10);
+		ctx.fillRect(x+50, y, 10, 10);
+		ctx.fillRect(x+50, y+10, 10, 10);
+		ctx.fillRect(x+60, y, 10, 10);
+		ctx.fillRect(x+60, y-10, 10, 10);
 		ctx.fillStyle = "rgb(128, 128, 128)";
-		ctx.fillRect(70, 50, 10, 10);
-		ctx.fillRect(70, 60, 10, 10);
-		ctx.fillRect(70, 40, 10, 10);
-		ctx.fillRect(70, 30, 10, 10);
+		ctx.fillRect(x+10, y-20, 10, 10);
 		ctx.fillStyle = "rgb(99, 98, 98)";
-		ctx.fillRect(80, 50, 10, 10);
-		ctx.fillRect(80, 60, 10, 10);
-		ctx.fillRect(80, 40, 10, 10);
+		ctx.fillRect(x+20, y-20, 10, 10);
+		ctx.fillRect(x+20, y-30, 10, 10);
+		ctx.fillStyle = "rgb(99, 98, 98)";
+		ctx.fillRect(x+30, y-20, 10, 10);
+		ctx.fillRect(x+30, y-30, 10, 10);
+		ctx.fillStyle = "rgb(128, 128, 128)";
+		ctx.fillRect(x+40, y-20, 10, 10);
 
 	}
 

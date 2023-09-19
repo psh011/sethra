@@ -1,5 +1,5 @@
 /*import Template from "../assets/images/template.png"*/
-import Ship from "./objects/Ship"
+import Ship from "./objects/ship"
 import TestLevel from "./levels/TestLevel"
 import Level from "./abstract/Level"
 

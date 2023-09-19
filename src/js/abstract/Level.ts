@@ -1,5 +1,5 @@
 import Background from "../objects/Background";
-import Ship from "../objects/Ship";
+import Ship from "../objects/ship";
 import GameObject from "./GameObject";
 
 export default abstract class Level {

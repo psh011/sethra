@@ -1,8 +1,8 @@
 import Level from "../abstract/Level";
 import Background from "../objects/Background";
 import Building from "../objects/Building";
-import Projectile from "../objects/Projectile";
-import Ship from "../objects/Ship";
+import Projectile from "../objects/projectile";
+import Ship from "../objects/ship";
 import Wall from "../objects/Wall";
 import TestLevelWallRenderer from "../objects/renderer/TestLevelWallRenderer";
 
@@ -14,8 +14,8 @@ export default class TestLevel extends Level {
         super.loadLevel(ship);
         
         const building = new Building();
-        building.setX(800);
-        building.setY(800);
+        building.setX(200);
+        building.setY(200);
         this.gameObjects.push(building);
         
         const projectile = new Projectile();
