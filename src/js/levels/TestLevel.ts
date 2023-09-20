@@ -14,8 +14,8 @@ export default class TestLevel extends Level {
         super.loadLevel(ship);
         
         const building = new Building();
-        building.setX(200);
-        building.setY(200);
+        building.setX(100);
+        building.setY(100);
         this.gameObjects.push(building);
         
         const projectile = new Projectile();
