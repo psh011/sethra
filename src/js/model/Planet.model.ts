@@ -1,4 +1,5 @@
 import BuildingModel from './Building.model';
+import TowerModel from './Tower.model';
 import GameObjectModel from './GameObject.model';
 import TileModel from './Tile.model';
 
@@ -80,9 +81,9 @@ export default class Planet {
         buildingModel.setX(planetWidth - 450);
         planet.gameObjects.push(buildingModel);
 
-        buildingModel = BuildingModel.generateBuilding();
-        buildingModel.setX(650);
-        planet.gameObjects.push(buildingModel);
+        let towerModel = TowerModel.generateTower();
+        towerModel.setX(650);
+        planet.gameObjects.push(towerModel);
 
         return planet;
     }
